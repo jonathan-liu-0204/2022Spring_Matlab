@@ -15,21 +15,25 @@ fprintf('Student ID:0716304 Name:劉子齊 Jonathan\n'); % show student id and n
                         
 disp('Problem 2.5') 	% show Problem 2.5
 
-t0 = 0; v0 = 0; k0 = 0.5; g = -9.81; p0 = 10;
+t0 = 0; v0 = 0; k0 = 0.5; g0 = -9.81; p0 = 10;
 dt = 1/30;
 
 figure
 hold on
+k = -1;
 
-p = p0; v = v0; t = t0;
-M = []; T = []; 
-
-while t <= 10
-    v = v + g * dt;
-    p = p + k * v * dt;
-    T = [T, t]; % expand T when necessary. This is slow.
-    M = [M, p]; % expand M when necessary. This is slow.
+while k <= 1
+    p = p0; v = v0; t = t0;
+    M = []; T = []; 
     
-    t = t + dt;
+    while t < 20
+        p = p + k * v * dt;
+        T = [T, t]; % expand T when necessary. This is slow.
+        M = [M, p]; % expand M when necessary. This is slow.
+        t = t + dt;
+    end
+    plot(T, M);
+
+    k = k + 0.1;
 end
-plot(T, M)
+
