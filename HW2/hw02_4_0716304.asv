@@ -25,9 +25,9 @@ index_y2 = find(y < 0);
 big_x = x(index_y1);
 big_y = y(index_y1);
 
-sml_x = x(index_y2);
-sml_y = y(index_y2);
+sml_x = x(
+sml_y = 
 
 plot(big_x, big_y, 'r', 'linewidth', 2);
 hold on
-plot(sml_x, sml_y, 'b', 'linewidth', 2);
+plot(x(index_y2), y(index_y2), 'linewidth', 2, 'b');
