@@ -15,16 +15,29 @@ fprintf('Student ID:0716304 Name:劉子齊 Jonathan\n'); % show student id and n
 
 disp('Problem 2.1') 	% show Problem 2.1
 
+x = [-10 : 0.05 : 10];
+
 while 1
     keyin = input('Please input the coefficients [A, B]:');
-    A = keyin(1); 
+    A = keyin(1);
     B = keyin(2);
+    
     if A == 0 
 	   fprintf('Thanks for playering.\n');
-	   break
+	   return
     elseif B == 0
        fprintf('Thanks for playering.\n');
-	   break
+	   return
     end
     
+    a = [(A-10) : 2 : (A+10)];
+    b = [(B-10) : 2 : (B+10)];
+    
+    for aa = a
+       for bb = b
+            y = aa .* sin(x) + bb .* tan(x ./ 10);
+            plot(x, y);
+            hold on
+       end
+    end
 end
