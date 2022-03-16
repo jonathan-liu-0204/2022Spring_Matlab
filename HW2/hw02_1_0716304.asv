@@ -1,0 +1,14 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Assignment Number: 2
+% Problem number: 1
+% Student Name:  劉子齊 Jonathan
+% Student ID: 0716304
+% Email address: jonathan.tzuchi.liu@gmail.com
+% Department: Computer Science
+% Date: 2021/03/15
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+clf; clear; clc;		% clear the current figure
+                        % clear variables, and clear screen
+
+disp('Problem 2.1') 	% show Problem 2.1
