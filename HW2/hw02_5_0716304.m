@@ -23,7 +23,6 @@ hold on
 p = p0; v = v0; t = t0;
 T = []; P = []; V = [];
 
-
 while t <= 10
     v = v + g * dt;
     p = p + k * v * dt;
