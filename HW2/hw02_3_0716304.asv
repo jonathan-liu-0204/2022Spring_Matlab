@@ -19,7 +19,7 @@ x = [-5: 0.01: 5];
 
 while 1
    keyin = input('Please input the value of "m" insode [-1, 10]:');
-   m = keyin(1);
+   m = keyin(1)
    
    if m <= -1
        fprintf('Thanks for playering.\n');
@@ -35,12 +35,13 @@ while 1
    y1 = sin(x);
    plot(x, y1, 'linewidth', 4);
    hold on
-   y2 = 0;
-     
-   for n = 0:m
-       y2 = y2 + ((-1) ^ n / factorial(2 * n + 1)) .* x .^ (2 * n + 1);
-       plot(x, y2, 'linewidth', 1);
-       hold on
-   end
-   ylim([-1.5, 1.5]);
+%    y2 = x;
+%      
+%    for n = 1:m
+% 
+%         y2 = y2 + ((-1) ^ n / factorial(2 * n + 1)) .* x .^ (2 * n + 1);
+%        
+%        plot(x, y2, 'linewidth', 1);
+        hold on
+    end
 end

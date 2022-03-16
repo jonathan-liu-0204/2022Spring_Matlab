@@ -30,7 +30,7 @@ while 1
 	   return
     end
     
-    clf; %Clear all curves in the current figure.
+    clf; % Clear all curves in the current figure.
 
     a = [aMin : da : aMax];
     
