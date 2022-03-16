@@ -20,7 +20,7 @@ x = [-10:0.05:10];
 while 1
     keyin = input('Please input the range of "a" [aMin, bMin]:');
     aMin = keyin(1);
-    bMin = keyin(2);
+    aMax = keyin(2);
     
     keyin2 = input('Please input the step size of "a" (da):');
     da = keyin2(1);
@@ -34,4 +34,9 @@ while 1
 
     a = [aMin : da : aMax];
     
+    for aa = a
+        y = tanh(aa .* x) .* exp(-cos(x));
+        plot(x, y, 'linewidth', 2);
+        hold on
+    end
 end

@@ -15,12 +15,28 @@ fprintf('Student ID:0716304 Name:劉子齊 Jonathan\n'); % show student id and n
                         
 disp('Problem 2.2') 	% show Problem 2.2
 
+x = [-10:0.05:10];
+
 while 1
     keyin = input('Please input the range of "a" [aMin, bMin]:');
     aMin = keyin(1);
     bMin = keyin(2);
     
-    keyin2 = input('Please input the step size of "a (da):')
+    keyin2 = input('Please input the step size of "a" (da):');
+    da = keyin2(1);
     
+    if da == 0
+       fprintf('Thanks for playering.\n');
+	   return
+    end
+    
+    clf; %Clear all curves in the current figure.
+
+    a = [aMin : da : aMax];
+    
+    for aa = a
+        y = tanh(a ./ x) .* exp(-cos(x));
+        plot()
+    end
     
 end
