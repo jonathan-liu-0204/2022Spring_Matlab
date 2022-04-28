@@ -13,3 +13,19 @@ clf; clear; clc;		% clear the current figure
 
 disp("Lab Problem 1.2") 	% show Lab Problem 1.2
 
+while 1
+    
+    b = input("Please input 'b': ");
+    if b == 0
+        disp("Thanks for playing.")
+        break;
+    end
+    
+    clf;
+    
+    x = [-10 : 0.01 : 10];
+    
+    f = @(x, y) x.^2  .* (abs(sin(y)) + 1) - 2 .* x .* y - b .* y.^2;
+    fimplicit(f, 'linewidth', 3)
+    
+end
