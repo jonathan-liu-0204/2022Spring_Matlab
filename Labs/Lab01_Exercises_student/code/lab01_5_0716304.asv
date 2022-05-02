@@ -25,33 +25,18 @@ while 1
        clf;
        t = 0;
        
-       T = [];
-       A = [];
-       V = [];
-       P = [];
-       F = [];
-       
-       v = 0;
-       p = 50;
-       
        while t <= 100
            M = 10000;
            m = 1;
-            
-           f = (-1) .* (p ./ norm(p)) .* ((m .* M) .* (p .^ 2));
-           a = f .* m - d .* v;
-           v = v + a .* 0.05;
+
+           F = (-1) .* (p ./ norm(p)) .* ((m * M) .* (p .^ 2));
+           a = F .* m - d .* v;
+           v = v + a * 0.05;
            p = p + v .* 0.05;
-           
-           t = t + 0.05;
-           
-           T = [T, t];
-           A = [A, a];
-           V = [V, v];
-           P = [P, p];
-           F = [F, f];
+           t = t + 
        end
        
-       plot(P, T);
+       plot(p, t);
+       xlim([0, 100]);
     end
 end
