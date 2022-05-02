@@ -18,40 +18,29 @@ while 1
     d = input("Please input 'd' in [0, 1]: ");
     
     if d < 0
+        disp("Terminated")
         return;
     elseif d > 1
+        disp("Please input valid input between 0 and 1.")
         continue;
     else
        clf;
-       t = 0;
+       v = [0 8];
+       p = [50 0];
+       m = 1;
+       M = 10000;
+       dt = 0.05;
        
-       T = [];
-       A = [];
-       V = [];
-       P = [];
-       F = [];
-       
-       v = 0;
-       p = 50;
-       
-       while t <= 100
-           M = 10000;
-           m = 1;
+       for t = [0 : dt : 100]
             
-           f = (-1) .* (p ./ norm(p)) .* ((m .* M) .* (p .^ 2));
-           a = f .* m - d .* v;
-           v = v + a .* 0.05;
-           p = p + v .* 0.05;
+           F = (-1) * (p / norm(p)) .* ((m * M) / (p * p.'));
+           a = F / m - d * v;
+           v = v + a * dt;
+           p = p + v * dt;
            
-           t = t + 0.05;
-           
-           T = [T, t];
-           A = [A, a];
-           V = [V, v];
-           P = [P, p];
-           F = [F, f];
+           plot(p(1), p(2), '.');
+           hold on;
        end
-       
-       plot(P, T);
+       figure(1);
     end
 end
