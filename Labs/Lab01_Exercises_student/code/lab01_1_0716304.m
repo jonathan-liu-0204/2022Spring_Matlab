@@ -37,5 +37,6 @@ while 1
     y = a .* abs(x) + sin(x);
     figure(1);
     plot(x, y, 'linewidth', 3);
+    figure(1)
     hold on;
 end

@@ -27,5 +27,7 @@ while 1
     
     f = @(x, y) x.^2  .* (abs(sin(y)) + 1) - 2 .* x .* y - b .* y.^2;
     fimplicit(f, 'linewidth', 3)
+    axis([-10 10 -10 10]);
+    figure(1);
     
 end

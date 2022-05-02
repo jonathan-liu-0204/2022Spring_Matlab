@@ -16,6 +16,7 @@ disp("Lab Problem 1.3") 	% show Lab Problem 1.3
 while 1
     
     m = input("Please enter a non-negative integer 'm' inside [0, 10]: ");
+    clf;
     
     if m == 0
         disp("Thanks for playing.");
