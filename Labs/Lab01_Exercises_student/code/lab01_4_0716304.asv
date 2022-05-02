@@ -15,8 +15,6 @@ disp("Lab Problem 1.4") 	% show Lab Problem 1.4
 
 while 1
     
-    hold off;
-    
     a = input("Please input 'a': ");
     dx = input("Please input a non-negative 'dx': ");
     if dx < 0
