@@ -36,7 +36,7 @@ while t <= 10
     P = [P, p];
     V = [V, v];
     
-    t = t + dt
+    t = t + dt;
 end
 
 figure(1), plot(T, V), xlim([0 12]);
