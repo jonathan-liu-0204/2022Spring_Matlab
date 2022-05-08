@@ -54,7 +54,7 @@ while t <= 20
     v1 = v1 + a1 .* dt;
     p1 = p1 + v1 .* dt;
     
-    y1(end+1) = p1(2);
+    y1(end+1) = p1(1);
     x1(end+1) = p1(2);
     
     F2 = m * g .* n;
@@ -62,19 +62,24 @@ while t <= 20
     v2 = v2 + a2 .* dt;
     p2 = p2 + v2 .* dt;
     
+    y2(end+1) = p2(1);
+    x2(end+1) = p2(2);
+    
     t = t + dt;
     
-%     subplot(1, 2, 1);
-    viscircles([p1(1) p1(2)], 1, 'color', 'b');
-    hold on;
-    plot(p1(1), p1(2));
+    subplot(1, 2, 1);
+    grid on;
+%     hold on;
+    plot(y1(end), x1(end), 'bo', 'MarkerFaceColor', 'b');
+        plot(y1, x1, 'color', [0,0.7,0.9]);
     axis([0 400 -100 100]);
+    
+    subplot(1, 2, 2);
+    grid on;
     hold on;
+    plot(y2, x2, 'color', [0,0.7,0.9]);
+    plot(y2(end), x2(end), 'bo', 'MarkerFaceColor', 'b');
+    axis([0 400 -100 100]);
     
-%     subplot(1, 2, 2);
-% %     viscircles([p2(1) p2(2)], 1, 'color', 'b');
-%     plot(p2(1), p2(2));
-%     axis([0 400 -100 100]);
-    
-    pause(dt);
+    pause(0.0001);
 end

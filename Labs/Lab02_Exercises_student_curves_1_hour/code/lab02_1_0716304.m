@@ -41,13 +41,15 @@ dt = 0.02;
 m = 1;
 g = 2;
 
+tmax = 20;
+
 x1 = [];
 y1 = [];
 x2 = [];
 y2 = [];
 
 
-while t <= 20
+while t <= tmax
     
     F1 = m * g .* n;
     a1 = F1 ./ m - d(1) .* v1;
@@ -68,16 +70,22 @@ while t <= 20
     t = t + dt;
     
     subplot(1, 2, 1);
-    viscircles([p1(1) p1(2)], 1, 'color', 'b');
-    hold on;
+    grid on;
     plot(y1, x1, 'color', [0,0.7,0.9]);
+    hold on;
+    p = plot(p1(1),p1(2), 'o', 'linewidth', 2, 'color', 'b');
+%     viscircles([p1(1) p1(2)], 1, 'color', 'b');
+    hold off;
     axis([0 400 -100 100]);
     
     subplot(1, 2, 2);
-    viscircles([p2(1) p2(2)], 1, 'color', 'b');
+    grid on;
+    plot(y2, x2, 'color', [0,0.7,0.9]);    
     hold on;
-    plot(y2, x2, 'color', [0,0.7,0.9]);
+    p = plot(p2(1),p2(2), 'o', 'linewidth', 2, 'color', 'b');
+%     viscircles([p2(1) p2(2)], 1, 'color', 'b');
+    hold off;
     axis([0 400 -100 100]);
     
-    pause(dt);
+    pause(0.0001);
 end
