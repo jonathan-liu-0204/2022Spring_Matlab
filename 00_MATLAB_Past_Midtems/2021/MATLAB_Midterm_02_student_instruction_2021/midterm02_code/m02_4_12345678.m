@@ -54,6 +54,9 @@ for f = [1:numFrames]
 %     K1 = cat(3, k0 .* Id .* L3(:,:,1), k0 .* Id(:,:,2) .* (2-L3(:,:,1)), k0 .* Id(:,:,3) .* (2-L3(:,:,1)));
     L5 = k0 .* Id .* L3;
     
+    if(f < 200)
+       L5 = L5 .* 0.3;
+    end
     imshow(L5);
     pause(0.003);
 end
