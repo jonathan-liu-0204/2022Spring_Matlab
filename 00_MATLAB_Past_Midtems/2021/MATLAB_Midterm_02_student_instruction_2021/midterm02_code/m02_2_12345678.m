@@ -51,7 +51,7 @@ for f = [0 : 0.005 : 1]
     
     subplot(1, 2, 1);
     plot(x1, y1, 'color', [0 0.4470 0.7410], 'linewidth', 2);
-        hold on;
+    hold on;
     plot(x2, y2, 'color', [0.6350 0.0780 0.1840], 'linewidth', 2);
     plot(xl, yl, 'color', [0.9290 0.6940 0.1250], 'linewidth', 2);
     hold off;
