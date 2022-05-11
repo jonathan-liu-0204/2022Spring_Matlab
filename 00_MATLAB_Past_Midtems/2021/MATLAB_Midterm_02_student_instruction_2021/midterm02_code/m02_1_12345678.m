@@ -16,6 +16,22 @@ disp('Midterm Problem 2.1') 	% show Midterm Problem 2.1
 
 disp('¼B¤l»ô 0716304');
 
+while true
+    option = input("Select an option for layout 1) horizontal 2) Vertical  ");
+
+    if(option == 1)
+        suby = 1;
+        subx = 2;
+        break;
+    elseif(option == 2)
+        suby = 2;
+        subx = 1;
+        break;
+    else
+        disp("Please choose a valid option...");
+    end
+end
+
 a1 = 2;
 b1 = 20;
 t1 = [0:0.02:6*pi];
@@ -28,25 +44,17 @@ x2 = [-pi:0.2:-eps eps:0.2:pi];
 r2 = a2 .* sin( 2 .* x2 ) ./ x2;
 n2 = ceil(2*pi / 0.2);
 
-i2 = 1;
-
-% subplot(1, 2, 1);
-% axis([-40 40 -30 40])
-% pass1 = plot(x1(1:n1-75), y1(1:n1-75));
-% patch(get(pass1,'XData'), get(pass1,'YData'), 'y');
-% hold on;
-
 for i  = [1 : 75]
     
     if(i <= n2)
         clf;
-        subplot(1, 2, 2);
+        subplot(suby, subx, 2);
         pass2 = polar(x2(1:i), r2(1:i), 'bo');
         hold on;
         patch(get(pass2,'XData'), get(pass2,'YData'), 'y');
     end
               
-    subplot(1, 2, 1);
+    subplot(suby, subx, 1);
     axis([-40 40 -30 40])
     pass1 = plot(x1(1:n1-75+i), y1(1:n1-75+i));
     patch(get(pass1,'XData'), get(pass1,'YData'), 'y');
