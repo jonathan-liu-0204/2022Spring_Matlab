@@ -27,22 +27,26 @@ input('Press ENTER to start...');
 
 numFrames = 500;
 
+% [x, y] = meshgrid([1:s(1)]);
+% x = (x - s(1)/2) ./ 30;
+% y = (y - s(2)/2) ./ 30;
+% r = sqrt(x .^ 2 + y .^ 2) + eps;
+% z = abs(sin(r) ./ r); 
+% zmax = max(max(z));
+% z = 5 .* z ./ zmax;
+
 Id = im2double(L2);
 
 for f = [1:numFrames]
     
-    figure(1);
-    
-    bf = f/numFrames;
-    f0 = bf * bf * pi * 2;
-%     f0 = f / numFrames * pi * 2;
+    f0 = f / numFrames * pi * 2;
     xx = 0.8 * s(2) * cos(f0) / 2;
     yy = 0.8 * s(1) * sin(f0) / 2;
     
     [x, y] = meshgrid([1:s(2)], [1:s(1)]);
-    x = (x - s(1)/2 + xx) ./ (160 / (1.01 ^ f)); % controls the intensity at the end
-    y = (y - s(2)/2 + yy) ./ (160 / (1.01 ^ f)); % controls the intensity at the end
-    r = sqrt(x .^ 2 + y .^ 2);
+    x = (x - s(1)/2 + xx) ./ 30;
+    y = (y - s(2)/2 + yy) ./ 30;
+    r = sqrt(x .^ 2 + y .^ 2) + eps;
     z = abs(sin(r) ./ r); 
     zmax = max(max(z));
     z = 5 .* z ./ zmax;
@@ -50,11 +54,9 @@ for f = [1:numFrames]
     L3 = cat(3, z, z, z);
     
     k0 = 0.5 + abs(0.5*(sin(f/20)));
-%   colorful
-%     K1 = cat(3, k0 .* Id .* L3(:,:,1), k0 .* Id(:,:,2) .* (2-L3(:,:,1)), k0 .* Id(:,:,3) .* (2-L3(:,:,1)));
-    L5 = k0 .* Id .* L3;
-    
-    imshow(L5);
-    pause(0.003);
+    K1 = cat(3, k0.*Id(:,:,1).*K(:,:,1), k0.*Id(:,:,2).*(2-K(:,:,1)), k0.*Id(:,:,3).*(2-K(:,:,1)));
+
+    imshow(K1);
+    pause(0.033);
 end
 
