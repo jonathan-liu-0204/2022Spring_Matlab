@@ -16,11 +16,11 @@ disp('Midterm Problem 2.2') 	% show Midterm Problem 2.1
 
 disp('¼B¤l»ô 0716304');
 
+dt1 = 0.01;
+dt2 = (r / 2*(R-r)) / dt1; 
 
 % plot 1
 a1 = 3;
-dt1 = 0.01;
-
 t1 = [0 : dt1 : 12*pi];
 x1 = a1 .* sin(t1) .* (exp(cos(t1)) - 2 .* cos(4 .* t1) - sin(t1 ./ 12) .^ 5);
 y1 = a1 .* cos(t1) .* (exp(cos(t1)) - 2 .* cos(4 .* t1) - sin(t1 ./ 12) .^ 5);
@@ -29,8 +29,6 @@ y1 = a1 .* cos(t1) .* (exp(cos(t1)) - 2 .* cos(4 .* t1) - sin(t1 ./ 12) .^ 5);
 R = 12;
 r = 4;
 d = R;
-dt2 = (r / 2*(R-r)) / dt1
-
 t2 = [0 : dt2 : 6 * pi * r / (R-r)];
 x2 = (R-r) .* cos(t2) + d .* cos(((R-r)/r) .* t2);
 y2 = (R-r) .* sin(t2) + d .* sin(((R-r)/r) .* t2);
@@ -43,18 +41,14 @@ for f = [0 : 0.1 : 1]
     yl = (1-k1) .* y1 + k1 .* y2;
     
     % right figure
-    k2 = (exp(f) -1) / (exp(1)-1); 
+    k2 = (e^f -1) / (e-1); 
     xr = (1-k2) .* x1 + k2 .* x2;
     yr = (1-k2) .* y1 + k2 .* y2;
     
     subplot(1, 2, 1);
-    axis([-20 20 -20 20])
-    plot(xl, yl);
+    plot(yl, xl);
     
     subplot(1, 2, 2);
-    axis([-20 20 -20 20])
-    plot(xr, yr);
-    
-    pause(0.1)
+    plot(yl, xl);
     
 end
