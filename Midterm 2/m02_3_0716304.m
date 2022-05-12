@@ -48,6 +48,7 @@ start = input("Press enter to start!!");
 
 while t <= tmax
     if(key_pressed_quit == 1)
+        close all;
        disp('¼B¤l»ô 0716304');
        break; 
     end
