@@ -40,12 +40,11 @@ SD = std(X);
 current_pdf = histogram(X, 'Normalization', 'pdf');
 
 hold on;
-ax = gca
+% ax = gca
 % x = linspace(ax.XLim(1), ax.XLim(2), 1000000);
 % plot(X, current_pdf, 'LineWidth', 2)
 
 pdf_X = normpdf(X);
-plot(X, pdf_X);
 
 % A = normrnd(0,1,1000,1);
 % histogram(A, 'Normalization', 'pdf');
