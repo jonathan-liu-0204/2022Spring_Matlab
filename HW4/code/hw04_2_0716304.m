@@ -81,19 +81,6 @@ else
     o4 = 4;
 end
 
-subplot(2, 2, 1);
-plot(x, y1);
-grid on;
-subplot(2, 2, 2);
-plot(x, y2);
-grid on;
-subplot(2, 2, 3);
-plot(x, y3);
-grid on;
-subplot(2, 2, 4);
-plot(x, y4);
-grid on;
-
 n_all = 10 / 0.01 + 1;
 
 for i = [1:1:n_all]
@@ -129,5 +116,6 @@ for i = [1:1:n_all]
     title(['(',num2str(o4), ') y4 = 4-x./2; Area:',num2str(a4)]);
     hold off;
     
+    figure(1);
     pause(0.025);
 end
