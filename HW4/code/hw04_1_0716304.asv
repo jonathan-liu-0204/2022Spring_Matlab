@@ -60,24 +60,22 @@ while true
     
     [N, edges] = histcounts(X, 'Normalization', 'pdf');
     
-    N = N(2:end-1);
-    edges = edges(2:end-2);
+    N = N(2:end-2);
     
-    p = polyfit(edges, N, ceil(log10(n)));
     
-    y1 = polyval(p, edges);
-    plot(edges, y1, 'linewidth', 3)
-    
-    n_point = length(y1);
+    p = polyfit(histBins(2:histNumBins),histValue(2:histNumBins), 15);
 
-    for i = [n_point:-1:1]
+    histBinLimits = histObject.BinLimits;
+    x1 = linspace(histBinLimits(1), histBinLimits(2));
+    y1 = polyval(p, x1);
+    plot(x1, y1, 'linewidth', 3)
+
+    for i = [100:-1:1]
         histogram(X, 'Normalization', 'pdf');
         hold on;
-        plot(edges, y1, 'linewidth', 3)
-        plot(edges(i), y1(i), '*', 'linewidth', 5)
-        title(['M = ', num2str(M), '; SD = ' , num2str(SD), '; a = ', num2str(a), '; b = ', num2str(b), '; c = ', num2str(c)]);
+        plot(x1, y1, 'linewidth', 3)
+        plot(x1(i), y1(i), '*', 'linewidth', 5)
         hold off;
-        
         figure(1)
         pause(0.05)
     end
