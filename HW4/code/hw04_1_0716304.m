@@ -28,7 +28,6 @@ while true
     end
     
     while true
-
         a = input("Please input 'a': ");
         b = input("Please input 'b': ");
         c = input("Please input 'c': ");
@@ -42,39 +41,51 @@ while true
         end
     end
 
-    clf;
-
-    Y = rand(1, n);
-    X = a .* Y .^ 2 + b .* Y + c;
-
-    M = mean(X);
-    SD = std(X);
-
-    % pdf_x = normpdf(X)
-
-
-    histObject = histogram(X, 'Normalization', 'pdf')
-    hold on;
-
-    histNumBins = histObject.NumBins - 1;
+    syms x;
+    syms y;
     
-    [N, edges] = histcounts(X, 'Normalization', 'pdf');
+    func = a * y ^2 + b * y + c;
+    s = solve(x == func, y);
+    d_func = diff(func);
     
-    N1 = N(2:end-1);
-    edges1 = edges(2:end-2);
+    ty0 = 0.8;      % testing
+    tx0 = double(subs(func, y, ty0));
     
-    p = polyfit(edges1, N1, ceil(log10(n)));
+    for i = 1:2
+        if(double(subs(s(i), tx0))>0)
+            cpf = s(i);
+            break;
+        end
+    end
     
-    y1 = polyval(p, edges);
-    plot(edges, y1, 'linewidth', 3)
+    if (double(subs(d_func, y, ty0)) < 0)
+        cpf = 1 - cpf;
+    end
     
-    n_point = length(y1);
+    my_pdf = diff(cpf);
+    
+    
+    close all;      
+    y = rand(n,1);
+    x1 = a .* y .^ 2 + b .* y + c;
+    
+    h = histogram(x1, 'Normalization', 'pdf');
+    [N, edges] = histcounts(x1, 'Normalization', 'pdf');
+    hold on
+    f = double(subs(my_pdf, x, edges));
+    plot(edges,f,'LineWidth',3);
+    set(gca, 'Fontsize',15);
+    
+    M = mean(x1);
+    SD = std(x1);
+    n_point = length(f);
 
     for i = [n_point:-1:1]
-        histogram(X, 'Normalization', 'pdf');
+        h = histogram(x1, 'Normalization', 'pdf');
         hold on;
-        plot(edges, y1, 'linewidth', 3)
-        plot(edges(i), y1(i), '*', 'linewidth', 5)
+        plot(edges,f,'LineWidth',3);
+        plot(edges(i), f(i), '*', 'linewidth', 3)
+        set(gca, 'Fontsize',10);
         title(['M = ', num2str(M), '; SD = ' , num2str(SD), '; a = ', num2str(a), '; b = ', num2str(b), '; c = ', num2str(c)]);
         hold off;
         
