@@ -1,11 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Midterm Number: …
-% Problem number: …
-% Student Name:  …
-% Student ID: …
-% Email address: …
+% Midterm Number: ï¿½
+% Problem number: ï¿½
+% Student Name:  ï¿½
+% Student ID: ï¿½
+% Email address: ï¿½
 % Department:
-% Date: …
+% Date: ï¿½
 % National Chiao Tung University, Taiwan
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -31,7 +31,7 @@ global key_press_stop;
     
     switch(event.Key) 
         case 's'
-            key_press_stop = true
+            key_press_stop = true;
         case 'm'
             key_press_return = true;
         case '1'

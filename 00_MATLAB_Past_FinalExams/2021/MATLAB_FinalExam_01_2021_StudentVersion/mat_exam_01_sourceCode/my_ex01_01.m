@@ -41,7 +41,6 @@ key_w_inc = false;
 key_u_dec = false;
 key_u_inc = false;
 key_pressed_quit = false;
-% set(h_fig,'KeyPressFcn',@m_KeyCallBack_curve); % callback function
 
 u = 0.1;
 w = 1;
