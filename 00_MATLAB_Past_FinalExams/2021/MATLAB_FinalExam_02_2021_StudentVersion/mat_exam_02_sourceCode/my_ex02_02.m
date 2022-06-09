@@ -1,11 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Assignment Number: Lab
-% Problem number: …
-% Student Name:  …
-% Student ID: …
-% Email address: …
+% Problem number: ï¿½
+% Student Name:  ï¿½
+% Student ID: ï¿½
+% Email address: ï¿½
 % Department: Computer Science, NYCU
-% Date: ….
+% Date: ï¿½.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Align the lines
@@ -13,156 +13,167 @@
 %
 % close all windows
 % clear variables, and clear screen
-close all; clf; clear; clc;
 
-% show Lab
-disp('Final Exam Problem 1.2');
-disp('Student Name; Student ID');
+close all; clear; clc;
 
+disp('Final Exam Problem 2.2');
+disp('id and name');
 
-        global key_pressed_op_1;
-global key_pressed_op_2;
-global key_pressed_op_3;
-global key_pressed_op_4;
-global key_pressed_quit; % 'q'
-global key_press_return; % 'm'
-        global key_press_stop; % 's' 
+global option;
+global index;
+global r1;
+global r2;
+global X;
+global Y1;
+global Y2;
+global KEY_Q;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Align the lines
-% Select all (CONTROL-A) and then press CONTROL-I
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+index = 1;
+r1 = -4;
+r2 = 4;
+KEY_Q = false;
 
-key_press_stop = false;
-        key_press_return = false;
-key_pressed_op_1 = false;
-    key_pressed_op_2 = false;
-            key_pressed_op_3 = false;
-key_pressed_op_4 = false;
-key_pressed_quit = false;
+X = -5:0.025:5;
+Y1 = (X - 2) .* (X + 2);
+Y2 = -2 * (X - 2) .* (X + 2) .* sin(X / 4);
 
-h_fig = figure
+disp('Enter option...');
+disp('  Opt 1) Function Graph');
+disp('  Opt 2) Region Filling');
+option = input(': ');
 
-set(h_fig,'KeyPressFcn',...
-    @m_KeyCallBack_system); % callback function
+while option ~= 1 && option ~= 2
+    option = input(': ');
+end
 
+h_fig = figure;
 
-input('Press ENTER to start.');
+set(h_fig, 'KeyPressFcn',@m_KeyCallBack);
 
-figure(h_fig);
+if option == 1
 
+    [X, Y] = meshgrid(-2.5:0.05:2.5);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-I = imread('tmp.png');
-I = im2double(I);
+    k11 = Y .* sin(X);
+    k12 = Y .* cos(X);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    k21 = cos(k12) ./ (cos(k11) .^ 2 + 0.1);
+    k22 = k11 .* k12;
+    k23 = sin(k12) ./ (abs(k12) + 0.1);
+    k24 = k11 .* cos(k12);
 
-op = 2;
+    k31 = -k21 ./ (abs(k24) + 0.2);
+    k32 = k23 .* sin(k22);
+    k33 = sin(k21) .* cos(k23);
 
-mainmsg = ["Key Usage:"...
-    "Key 1: Option 1"...
-    "Key 2: Option 2"...
-    ];
-while true
-    clf
-    op = 0;
-    key_press_stop = false;
-    key_press_return = false;
-key_pressed_op_1 = false;
-key_pressed_op_2 = false;
-key_pressed_op_3 = false;
-key_pressed_op_4 = false;
-key_pressed_quit = false;
-    
-    title(mainmsg);
-    pause(0.03);
-    if ( key_pressed_op_1 )
-        key_pressed_op_1 = false;
-        op = 1;
+    k41 = cos(k32) +2 * sin(k33);
+    k42 = cos(k31) ./ (sin(k33) + 2);
+
+    k51 = k42 .* k41;
+
+    F = [k11; k12; k21; k22; k23; k24; k31; k32; k33; k41; k42; k51];
+    titles = ['k11' 'k12' 'k21' 'k22' 'k23' 'k24' 'k31' 'k32' 'k33' 'k41' 'k42' 'k51'];
+
+    while ~KEY_Q
+        s0 = index * 101 + 1 - 101;
+        s1 = index * 101 + 101 - 101;
+        Z = F(s0:s1, :);
+        meshc(X, Y, Z);
+        colorbar;
+        xlabel('x');
+        ylabel('y');
+        title(titles((index - 1) * 3 + 1:index * 3));
+        pause(0.1);
     end
-    if ( key_pressed_op_2 )
-        key_pressed_op_2 = false;
-        op = 2;
-    end
-    if ( key_pressed_op_3 )
-        key_pressed_op_3 = false;
-        op = 3;
-    end
-    if ( key_pressed_op_4 )
-        key_pressed_op_4 = false;
-        op = 4;
-    end
-    if ( key_pressed_quit )
-        key_pressed_quit = false;
-       
-        % close all; % close all the figure windows
-        %disp('Student ID:12345678');
-        disp('Thanks for playing!');
-        
-        return;    % quit the program
-        
-    end
-    if (op ==1)
-        %initialize parameters and so on
-        %before entering the animation loop
-        t = 1;
-        while true
-            x = [-10:0.01:10];
-            y = sin(x+t)
-            t = t + 0.1;
-            plot(y, x);
-            
-            pause(0.033);
-            if (key_press_return)
-                break;
-            end;
-        end % while
-    end % if op ==1
-    
-    if (op==2) 
-        %initialize parameters and so on
-        %before entering the animation loop
-        t = 1; 
-        a = 1.5;
-        while true
-            x = [-10:0.01:10];
-            y = a.*x.*cos(x+t)
-            t = t + 0.1;
-            plot(x, y);
-            
-            pause(0.033);
-            if (key_press_return)
-                break;
-            end;
-        end % while
-    end % if op == 2
-    
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %Add your own stuff here if you want
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
-    
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % BEGIN: Do not modify the following code fragment
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    while true
-        
-        if (op==0) break; end
-        
-        title('Press c to continue...');
-        pause(0.03);
-        if (key_press_spacebar)
-            break;
-        end
-        
-    end
-    hold off
 
-end % while
-hold off;
-    
-    
-    
+else
+    segL = find(and(X >= r1, X < min(2, r2)));
+    segR = find(and(X <= r2, X >= max(2, r1)));
+    fill([r2 r1 X(segL) X(segR)], [-20 -20 Y2(segL) Y1(segR)], 'blue');
+    hold on;
+    fill([r2 r1 X(segL) X(segR)], [-20 -20 Y1(segL) Y2(segR)], 'yellow');
+    hold on;
+    plot(X, Y1, 'LineWidth', 5);
+    hold on;
+    plot(X, Y2, 'LineWidth', 5);
+    hold off;
+    axis([-5 5 -20 20]);
+    title(sprintf('(r1, r2) = (%.2f, %.2f)', r1, r2));
+    while ~KEY_Q
+        pause(0.1);
+    end
+end
+KEY_Q = false;
+disp('id and name');
+
+function m_KeyCallBack(~, event)
+    global option;
+    global index;
+    global r1;
+    global r2;
+    global X;
+    global Y1;
+    global Y2;
+    global KEY_Q;
+
+    switch (event.Key)
+        case 'n'
+            if option == 1
+                index = min(12, index + 1);
+            else
+                r1 = min(r1 + 1, r2);
+                segL = find(and(X >= r1, X < min(2, r2)));
+                segR = find(and(X <= r2, X >= max(2, r1)));
+                fill([r2 r1 X(segL) X(segR)], [-20 -20 Y2(segL) Y1(segR)], 'blue');
+                hold on;
+                fill([r2 r1 X(segL) X(segR)], [-20 -20 Y1(segL) Y2(segR)], 'yellow');
+                hold on;
+                plot(X, Y1, 'LineWidth', 5);
+                hold on;
+                plot(X, Y2, 'LineWidth', 5);
+                hold off;
+                axis([-5 5 -20 20]);
+                title(sprintf('(r1, r2) = (%.2f, %.2f)', r1, r2));
+            end
+        case 'm'
+            if option == 1
+                index = max(1, index - 1);
+            else
+                r2 = max(r2 - 1, r1);
+                segL = find(and(X >= r1, X < min(2, r2)));
+                segR = find(and(X <= r2, X >= max(2, r1)));
+                fill([r2 r1 X(segL) X(segR)], [-20 -20 Y2(segL) Y1(segR)], 'blue');
+                hold on;
+                fill([r2 r1 X(segL) X(segR)], [-20 -20 Y1(segL) Y2(segR)], 'yellow');
+                hold on;
+                plot(X, Y1, 'LineWidth', 5);
+                hold on;
+                plot(X, Y2, 'LineWidth', 5);
+                hold off;
+                axis([-5 5 -20 20]);
+                title(sprintf('(r1, r2) = (%.2f, %.2f)', r1, r2));
+            end
+        case 'b'
+            r1 = -4;
+            r2 = 4;
+            segL = find(and(X >= r1, X < min(2, r2)));
+            segR = find(and(X <= r2, X >= max(2, r1)));
+            fill([r2 r1 X(segL) X(segR)], [-20 -20 Y2(segL) Y1(segR)], 'blue');
+            hold on;
+            fill([r2 r1 X(segL) X(segR)], [-20 -20 Y1(segL) Y2(segR)], 'yellow');
+            hold on;
+            plot(X, Y1, 'LineWidth', 5);
+            hold on;
+            plot(X, Y2, 'LineWidth', 5);
+            hold off;
+            axis([-5 5 -20 20]);
+            title(sprintf('(r1, r2) = (%.2f, %.2f)', r1, r2));
+        case 'q'
+            KEY_Q = true;
+        otherwise
+
+    end
+
+end
+
+
